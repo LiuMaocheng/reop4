@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.z1806.dao.UserMapper" >
+
+	<select id="findAll" resultType="user">
+		select * from sys_user
+	</select>
+	
+	<select id="findById" parameterType="int" resultType="user">
+		select * from sys_user where id=#{id}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from sys_user where id=#{id}
+	</delete>
+	
+	<update id="update" parameterType="user">
+		update sys_user 
+			set
+			<trim suffixOverrides=",">
+				<if test="nickname!=null and nickname!=''">
+					nickname=#{nickname},
+				</if>
+				<if test="sex!=null and sex!=''">
+					sex=#{sex},
+				</if>
+			</trim>
+			where id=#{id}
+	</update>
+
+</mapper>
